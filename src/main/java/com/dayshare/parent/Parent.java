@@ -1,22 +1,37 @@
-package com.dayshare.user;
+package com.dayshare.parent;
 
-import com.dayshare.core.BaseEntity;
+import com.dayshare.child.Child;
+import com.dayshare.group.Group;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
-@Table(name = "users")
-public class User extends  BaseEntity {
-    private String userid;
+@Table(name = "parents")
+public class Parent {
+    @Id
+    @GeneratedValue
+    @Column(name="parent_id")
+    private Long parentId;
+    @Column(name= "user_id")
+    private String userId;
     private String email;
     private String username;
     @Column(name= "first_name")
     private String firstName;
     @Column(name= "last_name")
     private String lastName;
+    @OneToMany(mappedBy="parent", fetch = FetchType.EAGER)
+    private Set<Child> children;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name= "Group_Membership",
+            joinColumns = { @JoinColumn(name = "parent_id") },
+            inverseJoinColumns = { @JoinColumn(name = "group_id") }
+    )
+    private Set<Group> groups = new HashSet<>();
     private String address1;
     private String address2;
     private String city;
@@ -29,17 +44,17 @@ public class User extends  BaseEntity {
     @Column(name= "twitter_id")
     private String twitterId;
 
-    protected User() {
-        super();
-    }
+    public Parent() {}
 
-    public User(String userid, String email, String username, String firstName, String lastName, String address1, String address2, String city, String state, String zipcode, String profileImageUrl, String facebookId, String twitterId) {
-        this();
-        this.userid = userid;
+    public Parent(Long parentId, String userId, String email, String username, String firstName, String lastName, Set<Child> children, Set<Group> groups, String address1, String address2, String city, String state, String zipcode, String profileImageUrl, String facebookId, String twitterId) {
+        this.parentId = parentId;
+        this.userId = userId;
         this.email = email;
         this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.children = children;
+        this.groups = groups;
         this.address1 = address1;
         this.address2 = address2;
         this.city = city;
@@ -50,12 +65,40 @@ public class User extends  BaseEntity {
         this.twitterId = twitterId;
     }
 
-    public String getUserid() {
-        return userid;
+//    public Parent(Long parentId, String userId, String email, String username, String firstName, String lastName, Set<Child> children, String address1, String address2, String city, String state, String zipcode, String profileImageUrl, String facebookId, String twitterId) {
+//        this.parentId = parentId;
+//        this.userId = userId;
+//        this.email = email;
+//
+//        this.username = username;
+//        this.firstName = firstName;
+//        this.lastName = lastName;
+//        this.children = children;
+//        this.address1 = address1;
+//        this.address2 = address2;
+//        this.city = city;
+//        this.state = state;
+//        this.zipcode = zipcode;
+//        this.profileImageUrl = profileImageUrl;
+//        this.facebookId = facebookId;
+//        this.twitterId = twitterId;
+//    }
+
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
+
+    public String getUserId() {
+
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getEmail() {
@@ -88,6 +131,22 @@ public class User extends  BaseEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public Set<Child> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<Child> children) {
+        this.children = children;
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
     public String getAddress1() {
