@@ -1,9 +1,11 @@
 package com.dayshare.child;
 
+import com.dayshare.metadata.ChildMetadata;
 import com.dayshare.parent.Parent;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "children")
@@ -16,12 +18,14 @@ public class Child {
     private String firstName;
     @Column(name= "last_name")
     private String lastName;
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name="parent_id", nullable=false)
     private Parent parent;
     private String gender;
     @Column(name= "birth_date")
     private Date birthDate;
+    @OneToMany(mappedBy="child")
+    private Set<ChildMetadata> childMetadata;
 
     public Child() {}
 
@@ -80,6 +84,14 @@ public class Child {
 
     public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
+    }
+
+    public Set<ChildMetadata> getChildMetadata() {
+        return childMetadata;
+    }
+
+    public void setChildMetadata(Set<ChildMetadata> childMetadata) {
+        this.childMetadata = childMetadata;
     }
 }
 

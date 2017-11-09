@@ -23,7 +23,7 @@ public class Parent {
     private String firstName;
     @Column(name= "last_name")
     private String lastName;
-    @OneToMany(mappedBy="parent", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="parent")
     private Set<Child> children;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -37,6 +37,8 @@ public class Parent {
     private String city;
     private String state;
     private String zipcode;
+    private double latitude;
+    private double longitude;
     @Column(name= "profile_image_url")
     private String profileImageUrl;
     @Column(name= "facebook_id")
@@ -46,7 +48,7 @@ public class Parent {
 
     public Parent() {}
 
-    public Parent(Long parentId, String userId, String email, String username, String firstName, String lastName, Set<Child> children, Set<Group> groups, String address1, String address2, String city, String state, String zipcode, String profileImageUrl, String facebookId, String twitterId) {
+    public Parent(Long parentId, String userId, String email, String username, String firstName, String lastName, Set<Child> children, Set<Group> groups, String address1, String address2, String city, String state, String zipcode, double latitude, double longitude, String profileImageUrl, String facebookId, String twitterId) {
         this.parentId = parentId;
         this.userId = userId;
         this.email = email;
@@ -60,6 +62,8 @@ public class Parent {
         this.city = city;
         this.state = state;
         this.zipcode = zipcode;
+        this.latitude = latitude;
+        this.longitude = longitude;
         this.profileImageUrl = profileImageUrl;
         this.facebookId = facebookId;
         this.twitterId = twitterId;
@@ -187,6 +191,22 @@ public class Parent {
 
     public void setZipcode(String zipcode) {
         this.zipcode = zipcode;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public String getProfileImageUrl() {
