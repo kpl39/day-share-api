@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "child_metadata")
 public class ChildMetadata {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "child_metadata_id")
     private Long childMetadataId;
     @ManyToOne

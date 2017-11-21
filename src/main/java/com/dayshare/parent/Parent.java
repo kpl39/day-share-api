@@ -2,9 +2,12 @@ package com.dayshare.parent;
 
 import com.dayshare.child.Child;
 import com.dayshare.group.Group;
+import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -12,16 +15,22 @@ import java.util.Set;
 @Table(name = "parents")
 public class Parent {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="parent_id")
+    @Expose
     private Long parentId;
     @Column(name= "user_id")
+    @Expose
     private String userId;
+    @Expose
     private String email;
+    @Expose
     private String username;
     @Column(name= "first_name")
+    @Expose
     private String firstName;
     @Column(name= "last_name")
+    @Expose
     private String lastName;
     @OneToMany(mappedBy="parent")
     private Set<Child> children;
@@ -31,25 +40,36 @@ public class Parent {
             joinColumns = { @JoinColumn(name = "parent_id") },
             inverseJoinColumns = { @JoinColumn(name = "group_id") }
     )
-    private Set<Group> groups = new HashSet<>();
+    private List<Group> groups = new ArrayList<Group>();
+    @Expose
     private String address1;
+    @Expose
     private String address2;
+    @Expose
     private String city;
+    @Expose
     private String state;
+    @Expose
     private String zipcode;
+    @Expose
     private double latitude;
+    @Expose
     private double longitude;
     @Column(name= "profile_image_url")
+    @Expose
     private String profileImageUrl;
     @Column(name= "facebook_id")
+    @Expose
     private String facebookId;
     @Column(name= "twitter_id")
+    @Expose
     private String twitterId;
+    @Expose
+    private String description;
 
     public Parent() {}
 
-    public Parent(Long parentId, String userId, String email, String username, String firstName, String lastName, Set<Child> children, Set<Group> groups, String address1, String address2, String city, String state, String zipcode, double latitude, double longitude, String profileImageUrl, String facebookId, String twitterId) {
-        this.parentId = parentId;
+    public Parent(String userId, String email, String username, String firstName, String lastName, Set<Child> children, List<Group> groups, String address1, String address2, String city, String state, String zipcode, double latitude, double longitude, String profileImageUrl, String facebookId, String twitterId, String description) {
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -67,7 +87,9 @@ public class Parent {
         this.profileImageUrl = profileImageUrl;
         this.facebookId = facebookId;
         this.twitterId = twitterId;
+        this.description = description;
     }
+
 
 //    public Parent(Long parentId, String userId, String email, String username, String firstName, String lastName, Set<Child> children, String address1, String address2, String city, String state, String zipcode, String profileImageUrl, String facebookId, String twitterId) {
 //        this.parentId = parentId;
@@ -145,11 +167,11 @@ public class Parent {
         this.children = children;
     }
 
-    public Set<Group> getGroups() {
+    public List<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(Set<Group> groups) {
+    public void setGroups(List<Group> groups) {
         this.groups = groups;
     }
 
@@ -231,5 +253,13 @@ public class Parent {
 
     public void setTwitterId(String twitterId) {
         this.twitterId = twitterId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
