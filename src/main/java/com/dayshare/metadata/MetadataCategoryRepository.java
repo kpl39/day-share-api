@@ -1,4 +1,7 @@
 package com.dayshare.metadata;
 
-public class MetadataCategoryRepository {
+
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface MetadataCategoryRepository extends PagingAndSortingRepository<MetadataCategory, Long> {
 }

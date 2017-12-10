@@ -1,4 +1,6 @@
 package com.dayshare.metadata;
 
-public interface ChildMetadataRepository {
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+public interface ChildMetadataRepository extends PagingAndSortingRepository<ChildMetadata, Long> {
 }

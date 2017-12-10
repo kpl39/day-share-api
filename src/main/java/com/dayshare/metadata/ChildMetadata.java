@@ -72,3 +72,4 @@ public class ChildMetadata {
     }
 }
 
+//     compile group: 'com.amazonaws', name: 'aws-java-sdk-s3', version: '1.11.200'

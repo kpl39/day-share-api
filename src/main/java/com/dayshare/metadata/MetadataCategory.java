@@ -14,15 +14,21 @@ public class MetadataCategory {
     private Long metadataCategory;
     private String name;
     private String description;
+    @Column(name = "name_field_title")
+    private String nameFieldTitle;
+    @Column(name = "desc_field_title")
+    private String descFieldTitle;
     @OneToMany(mappedBy="metadataCategory")
     private Set<ChildMetadata> childMetadata;
 
     public MetadataCategory() {}
 
-    public MetadataCategory(Long metadataCategory, String name, String description) {
+    public MetadataCategory(Long metadataCategory, String name, String description, String nameFieldTitle, String descFieldTitle) {
         this.metadataCategory = metadataCategory;
         this.name = name;
         this.description = description;
+        this.nameFieldTitle = nameFieldTitle;
+        this.descFieldTitle = descFieldTitle;
     }
 
     public Long getMetadataCategory() {
@@ -47,5 +53,21 @@ public class MetadataCategory {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getNameFieldTitle() {
+        return nameFieldTitle;
+    }
+
+    public void setNameFieldTitle(String nameFieldTitle) {
+        this.nameFieldTitle = nameFieldTitle;
+    }
+
+    public String getDescFieldTitle() {
+        return descFieldTitle;
+    }
+
+    public void setDescFieldTitle(String descFieldTitle) {
+        this.descFieldTitle = descFieldTitle;
     }
 }

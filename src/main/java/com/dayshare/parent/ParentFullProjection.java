@@ -1,6 +1,8 @@
 package com.dayshare.parent;
 
+import com.dayshare.availabilty.ParentAvailability;
 import com.dayshare.child.Child;
+import com.dayshare.child.ChildFullProjection;
 import com.dayshare.group.Group;
 import org.springframework.data.rest.core.config.Projection;
 
@@ -15,7 +17,7 @@ public interface ParentFullProjection {
     String getUsername();
     String getFirstName();
     String getLastName();
-    Set<Child> getChildren();
+    Set<ChildFullProjection> getChildren();
     List<Group> getGroups();
     String getAddress1();
     String getAddress2();
@@ -26,4 +28,7 @@ public interface ParentFullProjection {
     String getFacebookId();
     String getTwitterId();
     String getDescription();
+    double getLatitude();
+    double getLongitude();
+    ParentAvailability getAvailability();
 }

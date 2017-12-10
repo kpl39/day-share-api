@@ -20,4 +20,6 @@ public interface ParentRepository extends PagingAndSortingRepository<Parent, Lon
     @RestResource(rel = "find-by-email", path = "findByEmail")
     Page<Parent> findByEmail(@Param("email") String email, Pageable page);
 
+    @RestResource(rel = "find-by-userid", path = "findByUserId")
+    Page<Parent> findByUserId(@Param("userId") String userId, Pageable page);
 }

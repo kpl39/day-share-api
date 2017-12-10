@@ -1,7 +1,9 @@
 package com.dayshare.parent;
 
+import com.dayshare.availabilty.ParentAvailability;
 import com.dayshare.child.Child;
 import com.dayshare.group.Group;
+import com.dayshare.messages.Message;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
@@ -66,10 +68,14 @@ public class Parent {
     private String twitterId;
     @Expose
     private String description;
+    @OneToMany(mappedBy = "recipient")
+    private Set<Message> messages;
+    @OneToOne(mappedBy = "parent")
+    private ParentAvailability availability;
 
     public Parent() {}
 
-    public Parent(String userId, String email, String username, String firstName, String lastName, Set<Child> children, List<Group> groups, String address1, String address2, String city, String state, String zipcode, double latitude, double longitude, String profileImageUrl, String facebookId, String twitterId, String description) {
+    public Parent(String userId, String email, String username, String firstName, String lastName, Set<Child> children, List<Group> groups, String address1, String address2, String city, String state, String zipcode, double latitude, double longitude, String profileImageUrl, String facebookId, String twitterId, String description, Set<Message> messages, ParentAvailability availability) {
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -88,6 +94,8 @@ public class Parent {
         this.facebookId = facebookId;
         this.twitterId = twitterId;
         this.description = description;
+        this.messages = messages;
+        this.availability = availability;
     }
 
 
@@ -261,5 +269,21 @@ public class Parent {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Set<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<Message> messages) {
+        this.messages = messages;
+    }
+
+    public ParentAvailability getAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(ParentAvailability availability) {
+        this.availability = availability;
     }
 }
