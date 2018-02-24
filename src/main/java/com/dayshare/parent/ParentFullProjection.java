@@ -4,6 +4,8 @@ import com.dayshare.availabilty.ParentAvailability;
 import com.dayshare.child.Child;
 import com.dayshare.child.ChildFullProjection;
 import com.dayshare.group.Group;
+import com.dayshare.socket.ConversationSocket;
+import com.dayshare.socket.SocketProjection;
 import org.springframework.data.rest.core.config.Projection;
 
 import java.util.List;
@@ -19,6 +21,7 @@ public interface ParentFullProjection {
     String getLastName();
     Set<ChildFullProjection> getChildren();
     List<Group> getGroups();
+    List<SocketProjection> getSockets();
     String getAddress1();
     String getAddress2();
     String getCity();

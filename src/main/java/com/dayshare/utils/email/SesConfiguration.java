@@ -16,20 +16,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SesConfiguration {
-    @Value("${aws.ses.iam_username}")
-    private String iamUsername;
-
-    @Value("${aws.ses.smtp_username}")
-    private String smtpUsername;
 
     @Value("${aws.access_key_id}")
     private String accessId;
 
     @Value("${aws.secret_access_key}")
     private String secretKey;
-
-    @Value("${aws.ses.password}")
-    private String password;
 
     @Value("${aws.ses.region}")
     private String region;

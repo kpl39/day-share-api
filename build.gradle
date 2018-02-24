@@ -29,6 +29,7 @@ repositories {
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-rest', version: '1.5.7.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '1.5.7.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-websocket', version: '1.5.7.RELEASE'
     compile 'org.postgresql:postgresql'
     compile group: 'com.google.code.gson', name: 'gson', version: '2.7'
     compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'

@@ -6,6 +6,7 @@ import com.dayshare.group.Group;
 import com.dayshare.metadata.ChildMetadata;
 import com.dayshare.metadata.MetadataCategory;
 import com.dayshare.parent.Parent;
+import com.dayshare.socket.ConversationSocket;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
@@ -18,6 +19,7 @@ public class RepositoryConfig extends RepositoryRestConfigurerAdapter {
         config.exposeIdsFor(Parent.class);
         config.exposeIdsFor(Child.class);
         config.exposeIdsFor(Group.class);
+        config.exposeIdsFor(ConversationSocket.class);
         config.exposeIdsFor(ChildMetadata.class);
         config.exposeIdsFor(MetadataCategory.class);
         config.exposeIdsFor(ParentAvailability.class);

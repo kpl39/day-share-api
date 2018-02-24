@@ -25,17 +25,20 @@ public class Message {
     @Column(name = "message_text")
     private String messageText;
     private Boolean unread;
+    @Column(name = "socketId")
+    private int socketId;
 
     public Message() {
     }
 
-    public Message(int senderId, Parent recipient, int recipientId, Date dateTime, String messageText, Boolean unread) {
+    public Message(int senderId, Parent recipient, int recipientId, Date dateTime, String messageText, Boolean unread, int socketId) {
         this.senderId = senderId;
         this.recipient = recipient;
         this.recipientId = recipientId;
         this.dateTime = dateTime;
         this.messageText = messageText;
         this.unread = unread;
+        this.socketId = socketId;
     }
 
     public Long getMessageId() {
@@ -92,5 +95,13 @@ public class Message {
 
     public void setUnread(Boolean unread) {
         this.unread = unread;
+    }
+
+    public int getSocketId() {
+        return socketId;
+    }
+
+    public void setSocketId(int socketId) {
+        this.socketId = socketId;
     }
 }

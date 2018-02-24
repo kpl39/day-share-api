@@ -1,6 +1,7 @@
 package com.dayshare.group;
 
 import com.dayshare.child.Child;
+import com.dayshare.events.Event;
 import com.dayshare.parent.Parent;
 
 import javax.persistence.*;
@@ -37,6 +38,8 @@ public class Group {
     @ManyToMany(mappedBy = "groups")
 //    private Set<Parent> parents = new HashSet<>();
     private List<Parent> parents = new ArrayList<Parent>();
+    @OneToMany(mappedBy = "group")
+    private Set<Event> events;
 
     public Group() {}
 

@@ -2,8 +2,10 @@ package com.dayshare.parent;
 
 import com.dayshare.availabilty.ParentAvailability;
 import com.dayshare.child.Child;
+import com.dayshare.events.Event;
 import com.dayshare.group.Group;
 import com.dayshare.messages.Message;
+import com.dayshare.socket.ConversationSocket;
 import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
@@ -18,23 +20,23 @@ import java.util.Set;
 public class Parent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="parent_id")
+    @Column(name ="parent_id")
     @Expose
     private Long parentId;
-    @Column(name= "user_id")
+    @Column(name = "user_id")
     @Expose
     private String userId;
     @Expose
     private String email;
     @Expose
     private String username;
-    @Column(name= "first_name")
+    @Column(name = "first_name")
     @Expose
     private String firstName;
-    @Column(name= "last_name")
+    @Column(name = "last_name")
     @Expose
     private String lastName;
-    @OneToMany(mappedBy="parent")
+    @OneToMany(mappedBy ="parent")
     private Set<Child> children;
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
@@ -43,6 +45,13 @@ public class Parent {
             inverseJoinColumns = { @JoinColumn(name = "group_id") }
     )
     private List<Group> groups = new ArrayList<Group>();
+    @ManyToMany(cascade =  {CascadeType.ALL})
+    @JoinTable(
+            name = "Socket_Membership",
+            joinColumns = { @JoinColumn(name = "parent_id") },
+            inverseJoinColumns = { @JoinColumn(name = "socket_id")}
+    )
+    private List<ConversationSocket> sockets = new ArrayList<>();
     @Expose
     private String address1;
     @Expose
@@ -57,13 +66,13 @@ public class Parent {
     private double latitude;
     @Expose
     private double longitude;
-    @Column(name= "profile_image_url")
+    @Column(name = "profile_image_url")
     @Expose
     private String profileImageUrl;
-    @Column(name= "facebook_id")
+    @Column(name = "facebook_id")
     @Expose
     private String facebookId;
-    @Column(name= "twitter_id")
+    @Column(name = "twitter_id")
     @Expose
     private String twitterId;
     @Expose
@@ -72,10 +81,12 @@ public class Parent {
     private Set<Message> messages;
     @OneToOne(mappedBy = "parent")
     private ParentAvailability availability;
+    @OneToMany(mappedBy = "primaryParent")
+    private Set<Event> events;
 
     public Parent() {}
 
-    public Parent(String userId, String email, String username, String firstName, String lastName, Set<Child> children, List<Group> groups, String address1, String address2, String city, String state, String zipcode, double latitude, double longitude, String profileImageUrl, String facebookId, String twitterId, String description, Set<Message> messages, ParentAvailability availability) {
+    public Parent(String userId, String email, String username, String firstName, String lastName, Set<Child> children, List<Group> groups, List<ConversationSocket> sockets, String address1, String address2, String city, String state, String zipcode, double latitude, double longitude, String profileImageUrl, String facebookId, String twitterId, String description, Set<Message> messages, ParentAvailability availability) {
         this.userId = userId;
         this.email = email;
         this.username = username;
@@ -83,6 +94,7 @@ public class Parent {
         this.lastName = lastName;
         this.children = children;
         this.groups = groups;
+        this.sockets = sockets;
         this.address1 = address1;
         this.address2 = address2;
         this.city = city;
@@ -181,6 +193,14 @@ public class Parent {
 
     public void setGroups(List<Group> groups) {
         this.groups = groups;
+    }
+
+    public List<ConversationSocket> getSockets() {
+        return sockets;
+    }
+
+    public void setSockets(List<ConversationSocket> sockets) {
+        this.sockets = sockets;
     }
 
     public String getAddress1() {

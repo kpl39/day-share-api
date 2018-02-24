@@ -2,6 +2,7 @@ package com.dayshare.metadata;
 
 
 import com.dayshare.child.Child;
+import com.google.gson.annotations.Expose;
 
 import javax.persistence.*;
 
@@ -11,14 +12,18 @@ public class ChildMetadata {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "child_metadata_id")
+    @Expose
     private Long childMetadataId;
     @ManyToOne
     @JoinColumn(name="child_id", nullable=false)
     private Child child;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "metadata_category_id")
+    @Expose
     private MetadataCategory metadataCategory;
+    @Expose
     private String name;
+    @Expose
     private String description;
 
     public ChildMetadata() {}
